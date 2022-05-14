@@ -16,7 +16,7 @@ IConfiguration config = new ConfigurationBuilder()
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<LufsDbContext>(opt => 
-    opt.UseMySQL(config.GetConnectionString("LufsDatabase")));
+    opt.UseMySql(config.GetConnectionString("LufsDatabase"), ServerVersion.AutoDetect(config.GetConnectionString("LufsDatabase"))));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

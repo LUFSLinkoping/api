@@ -1,4 +1,5 @@
 using api.Database;
+using api.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -17,6 +18,8 @@ IConfiguration config = new ConfigurationBuilder()
 builder.Services.AddControllers();
 builder.Services.AddDbContext<LufsDbContext>(opt => 
     opt.UseMySql(config.GetConnectionString("LufsDatabase"), ServerVersion.AutoDetect(config.GetConnectionString("LufsDatabase"))));
+
+builder.Services.AddScoped<NewsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

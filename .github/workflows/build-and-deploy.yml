@@ -75,7 +75,7 @@ jobs:
         with:
           command: /home/deployer/migrate.sh lufs_api_dev ${{ secrets.TARGET }}/migrations.sql
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          user: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           

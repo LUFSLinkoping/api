@@ -57,7 +57,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: .net-
+          name: .net-app
           
       - name: Deploy to Digitalocean
         uses: appleboy/scp-action@master

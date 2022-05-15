@@ -37,6 +37,9 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        
+      - name: copy migrations
+        run: cp migrations.sql ${{env.DOTNET_ROOT}}/myapp/migrations.sql
  
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -50,37 +53,11 @@ jobs:
     environment:
       name: 'Production'
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2.4.2
-        with:
-          path: code
-          
-      - name: Upload SQL Script
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          source: code/migrations.sql
-          target: ${{ secrets.TARGET }}/migrations.sql
-          
-      - name: Run migrations
-        uses: fifsky/ssh-action@master
-        with:
-          command: /home/deployer/migrate.sh lufs_api_dev ${{ secrets.TARGET }}/migrations.sql
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-        
-    
+    steps:                  
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-          path: build
           
       - name: Deploy to Digitalocean
         uses: appleboy/scp-action@master
@@ -89,14 +66,23 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          source: build/*
+          source: '*'
           target: ${{ secrets.TARGET }}
+           
+      - name: Run migrations
+        uses: fifsky/ssh-action@master
+        with:
+          command: /home/deployer/migrate.sh lufs_api_dev ${{ secrets.TARGET }}/migrations.sql
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
           
       - name: Restart service
         uses: fifsky/ssh-action@master
         with:
           command: systemctl restart lufs-api-dev.service
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          user: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}

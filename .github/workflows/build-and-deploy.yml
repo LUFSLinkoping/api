@@ -39,9 +39,7 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
         
       - name: dotnet efbundle
-        run: |
-          dotnet ef migrations bundle --self-contained -r linux-x64 --project api
-          cp ./efcore ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet ef migrations script --idempotent --project api --output ${{env.DOTNET_ROOT}}/myapp/migration.sql
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3

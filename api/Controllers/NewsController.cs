@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
 
-    [ApiController]
-    [Route("news")]
-    public class NewsController
+    public class NewsController : BaseController
     {
         private readonly ILogger<NewsController> _logger;
 

@@ -81,7 +81,7 @@ jobs:
       - name: Restart service
         uses: fifsky/ssh-action@master
         with:
-          command: systemctl restart lufs-api-dev.service
+          command: systemctl restart lufs-api-dev
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}

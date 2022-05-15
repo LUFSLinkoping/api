@@ -83,6 +83,6 @@ jobs:
         with:
           command: systemctl restart lufs-api-dev.service
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          user: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}

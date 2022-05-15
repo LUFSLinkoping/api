@@ -40,7 +40,7 @@ jobs:
         
       - name: dotnet efbundle
         run: |
-          dotnet ef migrations bundle --self-contained -r linux-x64
+          dotnet ef migrations bundle --self-contained -r linux-x64 --project api
           cp ./efcore ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job

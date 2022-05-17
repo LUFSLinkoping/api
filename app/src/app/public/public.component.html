@@ -1,11 +1,29 @@
 <mat-toolbar>
-    LUFS
-    <span class="toolbar-spacer"></span>
-    <button mat-button>Länk 1</button>
-    <button mat-button>Länk 2</button>
-    <button mat-button>Länk 3</button>
-    <button mat-button>Länk 4</button>
-    <button mat-button>Länk 5</button>
+    <mat-toolbar-row class="display-sm">
+        LUFS
+        <span class="toolbar-spacer"></span>
+        <div class="toolbar-toggler">
+            <button mat-icon-button (click)="displayCollapse=!displayCollapse">
+                <mat-icon>
+                    menu
+                </mat-icon>
+            </button>
+        </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="hidden-sm" [class.display-collapse]="displayCollapse">
+        <div class="hidden-sm">
+            LUFS
+        </div>
+        <span class="toolbar-spacer hidden-sm"></span>
+            <button mat-button>Länk 1</button>
+            <button mat-button>Länk 2</button>
+            <button mat-button>Länk 3</button>
+            <button mat-button>Länk 4</button>
+            <button mat-button>Länk 5</button>
+    </mat-toolbar-row>
+
+    
+    
 </mat-toolbar>
 <main>
     <router-outlet></router-outlet>

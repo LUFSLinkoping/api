@@ -1,9 +1,11 @@
 @import 'breakpoints';
 
 .jumbotron {
-    height: 400px;
+    height: 600px;
     background-color: red;
-
+    @include breakpoint(small) {
+        height: 400px;
+    }
 }
 
 

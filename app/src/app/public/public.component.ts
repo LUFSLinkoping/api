@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 export class PublicComponent implements OnInit {
 
   today = Date.now();
+  displayCollapse = false;
 
   constructor() { }
 

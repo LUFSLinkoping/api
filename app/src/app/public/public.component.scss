@@ -1,3 +1,4 @@
+@import 'breakpoints';
 
 .toolbar-spacer {
     flex: 1;
@@ -14,4 +15,32 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.hidden-sm {
+    display: inherit;
+    @include breakpoint(small) {
+        display: none;
+    }
+}
+
+.display-sm {
+    display: none;
+    @include breakpoint(small) {
+        display: inherit;
+    }
+}
+
+.display-collapse {
+    display: inherit;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    padding: 0;
+    padding-bottom: 16px;
+
+    button {
+        text-align: right;
+        padding: 4px 32px;
+    }
 }

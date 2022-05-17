@@ -1,0 +1,32 @@
+@import 'breakpoints';
+
+.jumbotron {
+    height: 400px;
+    background-color: red;
+
+}
+
+
+.news-grid {
+    display: grid;
+    padding: 8px;
+    gap: 8px;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-rows: 220px;
+
+    
+    .news-item {
+        background-color: blue;
+    }
+
+    @include breakpoint(medium) {
+        grid-template-columns: auto auto auto;
+    }
+    @include breakpoint(small) {
+        grid-template-columns: auto auto;
+    }
+    @include breakpoint(xsmall) {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
+}

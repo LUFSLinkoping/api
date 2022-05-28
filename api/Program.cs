@@ -14,7 +14,16 @@ IConfiguration config = new ConfigurationBuilder()
     .Build();
 
 // Add services to the container.
-
+builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(
+            policy =>
+            {
+                policy.WithOrigins("https://*.lufs.se").SetIsOriginAllowedToAllowWildcardSubdomains();
+                if(builder.Environment.IsDevelopment())
+                    policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            });
+    });
 builder.Services.AddControllers();
 builder.Services.AddDbContext<LufsDbContext>(opt => 
     opt.UseMySql(config.GetConnectionString("LufsDatabase"), ServerVersion.AutoDetect(config.GetConnectionString("LufsDatabase"))));
@@ -34,6 +43,8 @@ app.UseSwaggerUI();
 app.UseSwagger();
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

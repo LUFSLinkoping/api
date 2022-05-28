@@ -8,6 +8,8 @@ namespace api.Database
         public LufsDbContext(DbContextOptions<LufsDbContext> options) : base(options) { }
 
         public DbSet<News> News { get; set; } = null!;
+        public DbSet<Member> Members { get; set; } = null!;
+        public DbSet<MemberRegistration> MemberRegistrations { get; set; } = null!;
 
     }
 }

@@ -20,6 +20,7 @@ builder.Services.AddDbContext<LufsDbContext>(opt =>
     opt.UseMySql(config.GetConnectionString("LufsDatabase"), ServerVersion.AutoDetect(config.GetConnectionString("LufsDatabase"))));
 
 builder.Services.AddScoped<NewsService>();
+builder.Services.AddScoped<MemberService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -62,10 +62,10 @@ jobs:
       - name: Deploy to Digitalocean
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.DO_HOST_DEV }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_SSHKEY }}
+          port: ${{ secrets.DO_PORT }}
           source: '*'
           target: ${{ secrets.TARGET }}
            
@@ -73,16 +73,16 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: /home/deployer/migrate.sh lufs_api_dev ${{ secrets.TARGET }}/migrations.sql
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.DO_HOST_DEV }}
+          user: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_SSHKEY }}
+          port: ${{ secrets.DO_PORT }}
           
       - name: Restart service
         uses: fifsky/ssh-action@master
         with:
           command: sudo /bin/systemctl restart lufs-api-dev
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.DO_HOST_DEV }}
+          user: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_SSHKEY }}
+          port: ${{ secrets.DO_PORT }}

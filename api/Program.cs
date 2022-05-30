@@ -19,7 +19,12 @@ builder.Services.AddCors(options =>
         options.AddDefaultPolicy(
             policy =>
             {
-                policy.WithOrigins("https://*.lufs.se").SetIsOriginAllowedToAllowWildcardSubdomains();
+                policy.WithOrigins(new string[]
+                {
+                    "https://*.lufs.se",
+                    "https://lufs.se",
+                    "https://*.*.lufs.se"
+                }).SetIsOriginAllowedToAllowWildcardSubdomains();
                 if(builder.Environment.IsDevelopment())
                     policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
             });
